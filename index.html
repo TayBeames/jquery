@@ -91,28 +91,34 @@
     $("img").on("click", function(){
       $(this).remove();
     });
+    
   });
 
   $(function(){
-    $("body").append("<form>"); 
-    $("form").append("<div>");    
-    $("form div").append($(
-      '<label>Movie</label> <input type="text" id ="film"/> <label>stars</label> <input type="number" id="rating" min="0" max="10"/> <input type="submit"/>',
-      ));
-       
+    $(".container").append("<form id = 'movies'>\
+      <label>Movie</label>\
+      <input type='text' id ='film'/>\
+      <label>stars</label>\
+      <input type='number' id='rating' min='0' max='10'/>\
+      <input type = 'submit' id ='formSubmit'/>\ </form>\ <div class ='containerTwo'/>"); 
+      $('.containerTwo').append($('<ol>'));
+  });
+    
 
-    $('form').on('submit', function(){
-      let movie = ('film').val();
-      let stars = ('rating').val(); 
-      $('div').append(movie, stars);
-      $('div').append('<input type='button'/>');
-      console.log(movie, stars);
-      
+  $(document).ready(function(){
+      $('#formSubmit').on('click', function(e){
+      e.preventDefault();
+      let movie = $('#film').val();
+      let rating = $('#rating').val();      
+      $('.containerTwo ol').append($('<li>', {text: (movie + " rating: " + rating + " " )}));
+      $('ol li').addClass("listItem");  
+      $('.listItem:last-child').append($("<button id = 'remover'>Remove</>"));     
+    });  
+      $(".containerTwo").on("click", "#remover", function() {
+      $(this).closest('li').remove();
     });
   });
-   
-  
+ 
 </script>
 </body>
-
 </html>
